@@ -1,234 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OVERLANDCOIN (OLC)</title>
 
 <style>
-  body{
+body{
     margin:0;
-    font-family: Arial, sans-serif;
+    font-family:Arial, sans-serif;
     background:#0e1117;
     color:#fff;
     text-align:center;
-  }
+}
 
-  header{
+header{
     padding:70px 20px 50px;
-  }
+}
 
-  .logo{
+.logo{
     width:180px;
-    height:auto;
-    margin-bottom:18px;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,.55));
-  }
+    margin-bottom:20px;
+}
 
-  h1{
+h1{
     font-size:46px;
     margin:0 0 10px;
-    letter-spacing:1px;
-  }
+}
 
-  .tagline{
-    margin:0 auto 22px;
-    max-width:760px;
-    line-height:1.5;
+.tagline{
+    max-width:700px;
+    margin:0 auto 25px;
+    line-height:1.6;
     opacity:.9;
-  }
+}
 
-  .btn{
+.btn{
     display:inline-block;
-    padding:12px 22px;
-    margin:10px 8px 0;
-    border:none;
+    padding:14px 24px;
     border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
     background:#00c896;
-    color:#06110d;
+    color:#06231b;
     text-decoration:none;
-    transition: transform .08s ease-in-out;
-  }
-  .btn:active{ transform: scale(.98); }
+    font-weight:bold;
+}
 
-  section{
-    padding:45px 20px;
-  }
+section{
+    padding:50px 20px;
+}
 
-  .card{
+.card{
     background:#161b22;
-    padding:28px;
+    padding:30px;
     border-radius:14px;
-    max-width:820px;
-    margin:0 auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  }
+    max-width:800px;
+    margin:auto;
+}
 
-  .grid{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:16px;
-    margin-top:18px;
-  }
+.stat{
+    margin:12px 0;
+    word-break:break-all;
+}
 
-  @media (min-width: 720px){
-    .grid{ grid-template-columns: 1fr 1fr; }
-  }
-
-  .stat{
-    background:#0f1620;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:12px;
-    padding:16px;
-    text-align:left;
-  }
-
-  .label{
-    font-size:12px;
-    opacity:.7;
-    margin-bottom:6px;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-  }
-
-  .value{
-    font-size:14px;
-    word-break: break-all;
-    line-height:1.4;
-  }
-
-  .pill{
-    display:inline-block;
-    background:rgba(0,200,150,.12);
-    border:1px solid rgba(0,200,150,.3);
-    color:#79ffd9;
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:12px;
-    margin-top:10px;
-  }
-
-  footer{
-    padding:30px 18px 40px;
+footer{
+    padding:30px;
     font-size:12px;
     opacity:.6;
-  }
-
-  .divider{
-    height:1px;
-    background:rgba(255,255,255,.07);
-    max-width:820px;
-    margin:0 auto;
-  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <!-- LOGO -->
-  <img class="logo" src="logo.png" alt="OVERLANDCOIN Logo" />
 
-  <h1>OVERLANDCOIN (OLC)</h1>
+<img src="logo.png" class="logo" alt="OVERLANDCOIN Logo">
 
-  <p class="tagline">
-    A utility-focused token built on BlockDAG — designed to support the overland travel ecosystem:
-    routes, gear, community rewards, and future app integration.
-  </p>
+<h1>OVERLANDCOIN (OLC)</h1>
 
-  <a class="btn" href="https://explorer.blockdag.network/address/0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0" target="_blank" rel="noopener">
-    View Contract
-  </a>
+<p class="tagline">
+A utility-focused token built on BlockDAG — designed to support the overland travel ecosystem:
+routes, gear, community rewards, and future app integration.
+</p>
+
+<a class="btn" href="https://blockdagscan.com/address/0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0" target="_blank">
+View Contract
+</a>
+
 </header>
 
-<div class="divider"></div>
-
 <section>
-  <div class="card">
-    <h2>Token Info</h2>
-    <div class="grid">
-      <div class="stat">
-        <div class="label">Contract</div>
-        <div class="value">0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0</div>
-      </div>
+<div class="card">
+<h2>Token Info</h2>
 
-      <div class="stat">
-        <div class="label">Total Supply</div>
-        <div class="value">3,000,000,000 OLC</div>
-      </div>
+<div class="stat">
+<strong>Contract:</strong><br>
+0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0
+</div>
 
-      <div class="stat">
-        <div class="label">Network</div>
-        <div class="value">BlockDAG</div>
-      </div>
+<div class="stat">
+<strong>Total Supply:</strong><br>
+3,000,000,000 OLC
+</div>
 
-      <div class="stat">
-        <div class="label">Status</div>
-        <div class="value">Verified</div>
-        <div class="pill">On-chain transparency</div>
-      </div>
-    </div>
-  </div>
+<div class="stat">
+<strong>Network:</strong><br>
+BlockDAG
+</div>
+
+</div>
 </section>
 
 <section>
-  <div class="card">
-    <h2>Utility Vision</h2>
-    <p style="max-width:760px; margin:0 auto; line-height:1.7; opacity:.92;">
-      OVERLANDCOIN is being built around real-world overland travel utility. The long-term goal is to support
-      a community platform (and future app) where explorers can share routes, discover spots, earn rewards,
-      and connect with partners in the overland space.
-    </p>
+<div class="card">
+<h2>Utility Vision</h2>
 
-    <div class="grid" style="margin-top:18px;">
-      <div class="stat">
-        <div class="label">Planned Features</div>
-        <div class="value">
-          • Route sharing + community maps<br/>
-          • Rewards for explorers and contributors<br/>
-          • Gear marketplace integrations<br/>
-          • Partnerships with overland brands
-        </div>
-      </div>
-      <div class="stat">
-        <div class="label">Community</div>
-        <div class="value">
-          Social links coming next (Telegram/X).<br/>
-          Want yours added? Update the buttons anytime.
-        </div>
-      </div>
-    </div>
-  </div>
+<p>
+OVERLANDCOIN aims to power the future of overland travel by connecting explorers,
+routes, gear, and community rewards through blockchain technology.
+</p>
+
+<p>
+Future goals include route-sharing tools, explorer rewards,
+gear marketplace integrations, and travel partnerships.
+</p>
+
+</div>
 </section>
 
 <section>
-  <div class="card">
-    <h2>Roadmap</h2>
-    <div class="grid">
-      <div class="stat">
-        <div class="label">Phase 1</div>
-        <div class="value">Launch • Website • Branding • Community Setup</div>
-      </div>
-      <div class="stat">
-        <div class="label">Phase 2</div>
-        <div class="value">Utility MVP Planning • Partnerships • Growth</div>
-      </div>
-      <div class="stat">
-        <div class="label">Phase 3</div>
-        <div class="value">App Integration • Route Platform • Expanded Utility</div>
-      </div>
-      <div class="stat">
-        <div class="label">Phase 4</div>
-        <div class="value">Ecosystem Expansion • More Integrations • Scaling</div>
-      </div>
-    </div>
-  </div>
+<div class="card">
+<h2>Roadmap</h2>
+
+<p><strong>Phase 1:</strong> Launch • Website • Community Setup</p>
+<p><strong>Phase 2:</strong> Partnerships • Utility Planning</p>
+<p><strong>Phase 3:</strong> App Integration • Ecosystem Growth</p>
+<p><strong>Phase 4:</strong> Expansion • Real-world Utility Scaling</p>
+
+</div>
 </section>
 
 <footer>
-  OVERLANDCOIN © 2026 • Not Financial Advice • Always do your own research.
+OVERLANDCOIN © 2026 • Not Financial Advice • Always DYOR.
 </footer>
 
 </body>
