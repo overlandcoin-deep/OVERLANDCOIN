@@ -1,0 +1,162 @@
+import 'dotenv/config';
+import { Telegraf, Markup } from 'telegraf';
+
+const BOT_TOKEN = process.env.BOT_TOKEN;
+if (!BOT_TOKEN) {
+  console.error("Missing BOT_TOKEN in .env");
+  process.exit(1);
+}
+
+const bot = new Telegraf(BOT_TOKEN);
+
+// === YOUR PROJECT INFO ===
+const PROJECT = {
+  name: "OVERLANDCOIN",
+  symbol: "OLC",
+  supply: "3,000,000,000",
+  contract: "0xdc484e4ad0cB6007f10220144Ae986cbe7aC1611",
+  explorerBase: "https://bdagscan.com",
+  website: "https://overlandcoin.vercel.app", // change if different
+  telegram: "https://t.me/YourTelegramLink",  // update
+  x: "https://x.com/YourXLink"                // update
+};
+
+const contractUrl = `${PROJECT.explorerBase}/address/${PROJECT.contract}`;
+
+function mainMenu() {
+  return Markup.inlineKeyboard([
+    [Markup.button.url("View Contract", contractUrl), Markup.button.callback("Copy Contract", "COPY_CONTRACT")],
+    [Markup.button.callback("Supply", "SHOW_SUPPLY"), Markup.button.callback("Roadmap", "SHOW_ROADMAP")],
+    [Markup.button.callback("Purpose", "SHOW_PURPOSE"), Markup.button.callback("How to Buy", "SHOW_BUY")],
+    [Markup.button.url("Website", PROJECT.website)],
+    [Markup.button.url("Telegram", PROJECT.telegram), Markup.button.url("X", PROJECT.x)]
+  ]);
+}
+
+const PURPOSE_TEXT =
+`⛰️ *Purpose & Vision*
+${PROJECT.name} (${PROJECT.symbol}) is built for real-world exploration, long-term utility, and community growth.
+The direction: an outdoors-first brand + future real-world integrations (including app/utility pathways).`;
+
+const SUPPLY_TEXT =
+`🪙 *Token Supply*
+*Total Supply:* ${PROJECT.supply} ${PROJECT.symbol}
+*Contract:* \`${PROJECT.contract}\`
+*Explorer:* ${contractUrl}`;
+
+const ROADMAP_TEXT =
+`🧭 *Roadmap*
+*Phase 1 — Foundation*
+• Website + branding
+• Community channels
+• Transparency + explorer visibility
+
+*Phase 2 — Growth*
+• Partnerships & outreach
+• Listings visibility
+• Community campaigns
+
+*Phase 3 — Utility Build*
+• Utility/app direction planning
+• Pilot features + community input
+
+*Phase 4 — Expansion*
+• Integrations + ecosystem growth`;
+
+const BUY_TEXT =
+`🛒 *How to Buy (General)*
+1) Use a supported wallet on the network (as available).
+2) Fund your wallet with the chain’s gas token (for fees).
+3) Use the official contract address to find the token:
+\`${PROJECT.contract}\`
+4) Double-check the explorer link before swapping.
+
+⚠️ Always verify links. Never trust random DMs.`;
+
+bot.start(async (ctx) => {
+  const name = ctx.from?.first_name ?? "traveler";
+  const msg =
+`Welcome, ${name} 🌲
+
+*${PROJECT.name} (${PROJECT.symbol})* — Built for the open road.
+Use the buttons below for contract, supply, roadmap, and links.`;
+
+  await ctx.replyWithMarkdown(msg, mainMenu());
+});
+
+bot.command("help", (ctx) => {
+  ctx.replyWithMarkdown(
+`*Commands*
+/start – main menu
+/contract – explorer + contract
+/supply – total supply
+/purpose – mission
+/roadmap – plan
+/buy – general buying steps
+/links – official links`,
+  mainMenu());
+});
+
+bot.command("contract", (ctx) => ctx.replyWithMarkdown(`🔎 *Contract*\n\`${PROJECT.contract}\`\n${contractUrl}`, mainMenu()));
+bot.command("supply", (ctx) => ctx.replyWithMarkdown(SUPPLY_TEXT, mainMenu()));
+bot.command("purpose", (ctx) => ctx.replyWithMarkdown(PURPOSE_TEXT, mainMenu()));
+bot.command("roadmap", (ctx) => ctx.replyWithMarkdown(ROADMAP_TEXT, mainMenu()));
+bot.command("buy", (ctx) => ctx.replyWithMarkdown(BUY_TEXT, mainMenu()));
+bot.command("links", (ctx) => ctx.replyWithMarkdown(
+`🔗 *Official Links*
+Website: ${PROJECT.website}
+Explorer: ${PROJECT.explorerBase}
+Contract: \`${PROJECT.contract}\``,
+mainMenu()
+));
+
+// Button actions
+bot.action("COPY_CONTRACT", async (ctx) => {
+  await ctx.answerCbQuery("Copied!");
+  await ctx.replyWithMarkdown(`📋 Contract:\n\`${PROJECT.contract}\``);
+});
+
+bot.action("SHOW_SUPPLY", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithMarkdown(SUPPLY_TEXT, mainMenu());
+});
+
+bot.action("SHOW_ROADMAP", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithMarkdown(ROADMAP_TEXT, mainMenu());
+});
+
+bot.action("SHOW_PURPOSE", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithMarkdown(PURPOSE_TEXT, mainMenu());
+});
+
+bot.action("SHOW_BUY", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithMarkdown(BUY_TEXT, mainMenu());
+});
+
+// Basic safety: ignore other bots
+bot.on("message", (ctx, next) => {
+  if (ctx.from?.is_bot) return;
+  return next();
+});
+
+// Fallback
+bot.on("text", (ctx) => {
+  ctx.replyWithMarkdown(
+`🌿 I can help with:
+• Contract
+• Supply
+• Roadmap
+• Links
+
+Type /start to open the menu.`,
+mainMenu()
+);
+});
+
+bot.launch().then(() => console.log("OLC bot running ✅"));
+
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
