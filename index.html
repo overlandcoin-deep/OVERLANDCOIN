@@ -1,148 +1,391 @@
-<!DOCTYPE html>
+<!--
+  OVERLANDCOIN (OLC) — Full single-file website (index.html)
+  ✅ Correct contract address
+  ✅ Correct BDAGScan explorer link
+  ✅ Copy address button
+  ✅ “Add to MetaMask” button (works only in compatible wallet browsers)
+  ✅ Sections: Hero, Contract, How to Buy, Token Info, Roadmap, FAQ, Links
+  ✅ Uses your logo if you upload it as /logo.png in the repo
+
+  Contract: 0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0
+  Explorer: https://bdagscan.com/address/0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0
+
+  HOW TO USE (GitHub):
+  1) Create/replace index.html with this file
+  2) Upload your logo as logo.png in the same folder
+  3) Commit changes (Vercel will auto-deploy)
+
+  Optional: Update TELEGRAM_URL / X_URL / WEBSITE_URL below.
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OVERLANDCOIN (OLC)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>OVERLANDCOIN (OLC)</title>
+  <meta name="description" content="OVERLANDCOIN (OLC) on BlockDAG. Contract, explorer, and community."/>
+  <meta name="theme-color" content="#070A12"/>
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#0e1117;
-    color:#fff;
-    text-align:center;
-}
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel:#0D1222;
+      --panel2:#0A0F1F;
+      --text:#EAF0FF;
+      --muted:#AAB6D6;
+      --border:rgba(255,255,255,.10);
+      --glow:rgba(82,140,255,.25);
+      --accent:#5FA3FF;
+      --accent2:#9B7BFF;
+      --good:#4CFFB5;
+      --warn:#FFD56A;
+      --bad:#FF6B6B;
+      --shadow: 0 16px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+    }
 
-header{
-    padding:70px 20px 50px;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(155,123,255,.22), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(95,163,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(76,255,181,.10), transparent 60%),
+        var(--bg);
+    }
 
-.logo{
-    width:180px;
-    margin-bottom:20px;
-}
+    a{color:inherit}
+    .container{width:min(1100px, 92vw); margin:0 auto;}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .navinner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 220px;
+      text-decoration:none;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(95,163,255,.22), rgba(155,123,255,.18));
+      border:1px solid var(--border);
+      overflow:hidden;
+      display:grid; place-items:center;
+      box-shadow: 0 0 0 6px rgba(255,255,255,.02), 0 18px 60px var(--glow);
+      flex:0 0 auto;
+    }
+    .logo img{width:100%; height:100%; object-fit:cover}
+    .brand h1{font-size:14px; margin:0; letter-spacing:.4px}
+    .brand .sub{font-size:12px; color:var(--muted); margin-top:2px}
+    .navlinks{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size:12px;
+      text-decoration:none;
+      transition: background .15s ease, border-color .15s ease, transform .05s ease;
+    }
+    .chip:hover{background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18)}
+    .chip:active{transform: translateY(1px)}
 
-h1{
-    font-size:46px;
-    margin:0 0 10px;
-}
+    .hero{
+      padding:42px 0 24px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+      .brand{min-width:auto}
+    }
+    .card{
+      background: rgba(13,18,34,.88);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(12px);
+    }
+    .headline{
+      font-size:38px;
+      line-height:1.05;
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .headline span{
+      background: linear-gradient(90deg, rgba(95,163,255,.9), rgba(155,123,255,.9));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead{
+      margin:12px 0 0;
+      color: var(--muted);
+      font-size:15px;
+      line-height:1.55;
+    }
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+      align-items:center;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+      transition: transform .05s ease, background .15s ease, border-color .15s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.20)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(95,163,255,.24), rgba(155,123,255,.20));
+      border-color: rgba(95,163,255,.35);
+    }
+    .btn.good{
+      background: linear-gradient(135deg, rgba(76,255,181,.18), rgba(95,163,255,.12));
+      border-color: rgba(76,255,181,.35);
+    }
 
-.tagline{
-    max-width:700px;
-    margin:0 auto 25px;
-    line-height:1.6;
-    opacity:.9;
-}
+    .mini{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
 
-.btn{
-    display:inline-block;
-    padding:14px 24px;
-    border-radius:8px;
-    background:#00c896;
-    color:#06231b;
-    text-decoration:none;
-    font-weight:bold;
-}
+    .section{
+      padding:14px 0;
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size:16px;
+      color: var(--text);
+      letter-spacing:.2px;
+    }
+    .muted{
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .sep{height:1px; background: var(--border); margin:12px 0}
 
-section{
-    padding:50px 20px;
-}
+    .addrBox{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      overflow:auto;
+      white-space:nowrap;
+    }
 
-.card{
-    background:#161b22;
-    padding:30px;
-    border-radius:14px;
-    max-width:800px;
-    margin:auto;
-}
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){ .grid2{grid-template-columns:1fr} }
 
-.stat{
-    margin:12px 0;
-    word-break:break-all;
-}
+    .steps{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .step{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius: 16px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.16);
+    }
+    .badge{
+      width:28px; height:28px; border-radius:10px;
+      display:grid; place-items:center;
+      font-weight:800;
+      background: rgba(95,163,255,.14);
+      border:1px solid rgba(95,163,255,.28);
+      flex:0 0 auto;
+    }
+    .faq details{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.16);
+      border-radius: 16px;
+      padding:12px;
+      margin-top:10px;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq p{margin:10px 0 0}
+    footer{
+      padding:22px 0 28px;
+      color: var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
 
-footer{
-    padding:30px;
-    font-size:12px;
-    opacity:.6;
-}
-</style>
+    .note{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,213,106,.25);
+      background: rgba(255,213,106,.08);
+      color: rgba(255,235,185,.92);
+      font-size:13px;
+    }
+
+    .danger{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,107,107,.25);
+      background: rgba(255,107,107,.08);
+      color: rgba(255,210,210,.92);
+      font-size:13px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="nav">
+    <div class="container navinner">
+      <a class="brand" href="#top">
+        <div class="logo" title="OLC Logo"><img id="logo" alt="OLC logo"></div>
+        <div>
+          <h1>OVERLANDCOIN (OLC)</h1>
+          <div class="sub">BlockDAG • Explorer + Contract</div>
+        </div>
+      </a>
 
-<header>
+      <div class="navlinks">
+        <a class="chip" href="#contract">Contract</a>
+        <a class="chip" href="#buy">How to Buy</a>
+        <a class="chip" href="#token">Token</a>
+        <a class="chip" href="#roadmap">Roadmap</a>
+        <a class="chip" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </div>
 
-<img src="logo.png" class="logo" alt="OVERLANDCOIN Logo">
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="card">
+          <h1 class="headline">Build. Hold. <span>Overland.</span></h1>
+          <p class="lead">
+            OVERLANDCOIN (OLC) is a community-focused token deployed on BlockDAG.
+            Use this site to verify the contract, view it on BDAGScan, and follow the official links.
+          </p>
 
-<h1>OVERLANDCOIN (OLC)</h1>
+          <div class="ctaRow">
+            <a class="btn primary" id="explorerBtn" target="_blank" rel="noreferrer">🔎 View on BDAGScan</a>
+            <button class="btn good" id="copyBtn" type="button">📋 Copy Contract</button>
+            <button class="btn" id="addTokenBtn" type="button">🦊 Add to MetaMask</button>
+          </div>
 
-<p class="tagline">
-A utility-focused token built on BlockDAG — designed to support the overland travel ecosystem:
-routes, gear, community rewards, and future app integration.
-</p>
+          <div class="mini">
+            <span class="pill">🪙 Symbol: <strong style="color:var(--text)">OLC</strong></span>
+            <span class="pill">🔢 Decimals: <strong style="color:var(--text)">18</strong></span>
+            <span class="pill">📌 Network: <strong style="color:var(--text)">BlockDAG EVM</strong></span>
+          </div>
 
-<a class="btn" href="https://blockdagscan.com/address/0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0" target="_blank">
-View Contract
-</a>
+          <div class="sep"></div>
 
-</header>
+          <div class="muted">
+            Always verify the contract address before buying or adding the token in any wallet.
+          </div>
+        </div>
 
-<section>
-<div class="card">
-<h2>Token Info</h2>
+        <div class="card">
+          <h2>Official Contract Address</h2>
+          <div id="contractAddress" class="addrBox"></div>
 
-<div class="stat">
-<strong>Contract:</strong><br>
-0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0
-</div>
+          <div class="sep"></div>
 
-<div class="stat">
-<strong>Total Supply:</strong><br>
-3,000,000,000 OLC
-</div>
+          <div class="note">
+            Correct explorer link:
+            <div style="margin-top:6px; word-break:break-all; font-family: ui-monospace, monospace;">
+              https://bdagscan.com/address/0xEaDeeF2fdC380E824323Bfe450b95a928ca8AcE0
+            </div>
+          </div>
 
-<div class="stat">
-<strong>Network:</strong><br>
-BlockDAG
-</div>
+          <div style="margin-top:12px" class="muted">
+            If the explorer ever shows “not found,” it’s usually the wrong link type (tx vs address),
+            wrong network, or indexing delay.
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div>
-</section>
-
-<section>
-<div class="card">
-<h2>Utility Vision</h2>
-
-<p>
-OVERLANDCOIN aims to power the future of overland travel by connecting explorers,
-routes, gear, and community rewards through blockchain technology.
-</p>
-
-<p>
-Future goals include route-sharing tools, explorer rewards,
-gear marketplace integrations, and travel partnerships.
-</p>
-
-</div>
-</section>
-
-<section>
-<div class="card">
-<h2>Roadmap</h2>
-
-<p><strong>Phase 1:</strong> Launch • Website • Community Setup</p>
-<p><strong>Phase 2:</strong> Partnerships • Utility Planning</p>
-<p><strong>Phase 3:</strong> App Integration • Ecosystem Growth</p>
-<p><strong>Phase 4:</strong> Expansion • Real-world Utility Scaling</p>
-
-</div>
-</section>
-
-<footer>
-OVERLANDCOIN © 2026 • Not Financial Advice • Always DYOR.
-</footer>
-
-</body>
-</html>
+    <section id="contract" class="section">
+      <div class="grid2">
+        <div class="card">
+          <h2>Verify on BDAGScan</h2>
+          <p class="muted">
+            Use BDAGScan to confirm you’re looking at the official OVERLANDCOIN contract.
+          </p>
+          <div class="sep"></div>
+          <div class="steps">
+            <div class="step">
+              <div class="badge">1</div>
+              <div>
+                <div style="font-weight:800">Open the address page</div>
+                <div class="muted">Explorer uses <code>/address/&lt;contract&gt;</code> format.</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="badge">2</div>
+              <div>
+                <div style="font-weight:800">Confirm it’s a contract</div>
+                <div class
