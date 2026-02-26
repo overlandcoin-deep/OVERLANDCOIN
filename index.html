@@ -1,243 +1,181 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OVERLANDCOIN (OLC)</title>
-  <meta name="description" content="Official site for OVERLANDCOIN (OLC) on BlockDAG." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OVERLANDCOIN (OLC)</title>
 
-  <style>
-    :root{
-      --bg1:#0b0f1a;
-      --bg2:#05060a;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.14);
-      --border2: rgba(255,255,255,0.10);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.75);
-      --muted2: rgba(255,255,255,0.6);
-      --btn: rgba(255,255,255,0.14);
-      --btn2: rgba(0,0,0,0.22);
-      --shadow: 0 14px 60px rgba(0,0,0,0.55);
-      --radius: 18px;
-    }
+<style>
+body{
+margin:0;
+font-family:system-ui,Arial;
+color:white;
+background:
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
+url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee');
+background-size:cover;
+background-attachment:fixed;
+}
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:24px;
-      background:
-        radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 60%, #000 100%);
-    }
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+}
 
-    .card{
-      width:min(920px, 100%);
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
+.card{
+background:rgba(0,0,0,.65);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.15);
+margin-bottom:25px;
+}
 
-    .header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-    }
+.header{
+display:flex;
+align-items:center;
+gap:20px;
+}
 
-    .logo{
-      width:72px;
-      height:72px;
-      border-radius:14px;
-      border:1px solid var(--border2);
-      background: rgba(0,0,0,0.25);
-      padding:10px;
-      object-fit:contain;
-    }
+.logo{
+width:80px;
+border-radius:12px;
+}
 
-    h1{
-      margin:0;
-      font-size:34px;
-      letter-spacing:0.2px;
-      line-height:1.1;
-    }
+h1,h2{margin-top:0}
+p{opacity:.9;line-height:1.6}
 
-    .ticker{
-      opacity:0.8;
-      font-weight:700;
-    }
+.btn{
+display:inline-block;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.25);
+background:rgba(255,255,255,.12);
+color:white;
+text-decoration:none;
+margin-top:12px;
+}
 
-    .subtitle{
-      margin:6px 0 0;
-      opacity:0.82;
-    }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
 
-    .section{
-      margin-top:14px;
-      padding-top:16px;
-      border-top:1px solid var(--border2);
-    }
+.address{
+background:rgba(0,0,0,.5);
+padding:14px;
+border-radius:10px;
+overflow:auto;
+}
 
-    .row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:10px;
-      flex-wrap:wrap;
-    }
-
-    .label{
-      font-size:14px;
-      opacity:0.85;
-      font-weight:700;
-    }
-
-    .smallbtn{
-      cursor:pointer;
-      border-radius:10px;
-      padding:8px 12px;
-      background: rgba(255,255,255,0.10);
-      color: var(--text);
-      border: 1px solid var(--border);
-      transition: transform .06s ease;
-    }
-    .smallbtn:active{ transform: scale(0.98); }
-
-    .addressbox{
-      padding:14px;
-      border-radius:14px;
-      background: rgba(0,0,0,0.35);
-      border:1px solid var(--border2);
-      overflow-x:auto;
-    }
-    code{
-      font-size:14px;
-      white-space:nowrap;
-    }
-
-    .actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      border-radius:14px;
-      padding:12px 16px;
-      background: var(--btn);
-      color: var(--text);
-      border:1px solid var(--border);
-      transition: transform .06s ease, opacity .12s ease;
-    }
-    .btn:active{ transform: scale(0.98); }
-    .btn:hover{ opacity: 0.95; }
-
-    .btn.secondary{
-      background: var(--btn2);
-      border:1px solid var(--border);
-    }
-
-    .footer{
-      margin-top:18px;
-      padding-top:14px;
-      border-top:1px solid var(--border2);
-      opacity:0.75;
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .toast{
-      margin-left:auto;
-      font-size:13px;
-      opacity:0.9;
-    }
-  </style>
+ul{line-height:1.8}
+</style>
 </head>
 
 <body>
-  <main class="card">
-    <div class="header">
-      <!-- Put your logo in the SAME folder and name it: logo.png -->
-      <img class="logo" src="logo.png" alt="OVERLANDCOIN Logo"
-           onerror="this.style.display='none'">
 
-      <div>
-        <h1>OVERLANDCOIN <span class="ticker">(OLC)</span></h1>
-        <p class="subtitle">Built on BlockDAG • Official Contract Page</p>
-      </div>
-    </div>
+<div class="container">
 
-    <section class="section">
-      <div class="row">
-        <span class="label">Contract Address</span>
-        <div class="row" style="margin:0;">
-          <button class="smallbtn" id="copyBtn">Copy</button>
-          <span class="toast" id="toast" aria-live="polite"></span>
-        </div>
-      </div>
+<!-- HEADER -->
+<div class="card header">
+<img src="logo.png" class="logo">
+<div>
+<h1>OVERLANDCOIN (OLC)</h1>
+<p>Adventure • Utility • Blockchain Freedom</p>
+</div>
+</div>
 
-      <div class="addressbox">
-        <code id="contractText">0xdc484e4ad0cB6007f10220144Ae986cbe7aC1611</code>
-      </div>
+<!-- PURPOSE -->
+<div class="card">
+<h2>Purpose & Vision</h2>
+<p>
+OVERLANDCOIN is designed as a blockchain-powered asset built for
+real-world exploration, digital innovation, and long-term value.
+The vision is to bridge outdoor lifestyle, travel, mapping utility,
+and decentralized finance into one ecosystem.
+</p>
 
-      <div class="actions">
-        <a class="btn" id="viewContract" target="_blank" rel="noreferrer">
-          View Contract on BDAGScan
-        </a>
+<ul>
+<li>Real-world asset integration</li>
+<li>Outdoor/travel focused future app ecosystem</li>
+<li>Community-first growth</li>
+<li>Long-term utility and value development</li>
+</ul>
+</div>
 
-        <a class="btn secondary" href="https://bdagscan.com" target="_blank" rel="noreferrer">
-          Open Explorer
-        </a>
-      </div>
-    </section>
+<!-- SUPPLY + TOKENOMICS -->
+<div class="card">
+<h2>Tokenomics</h2>
 
-    <div class="footer">
-      If “View Contract” ever fails, it’s usually the explorer being down or a bad link — your contract still exists on-chain.
-    </div>
-  </main>
+<div class="grid">
+<div>
+<h3>Total Supply</h3>
+<p><strong>3,000,000,000 OLC</strong></p>
+<p>Fixed supply for scarcity and long-term growth.</p>
+</div>
 
-  <script>
-    const CONTRACT_ADDRESS = "0xdc484e4ad0cB6007f10220144Ae986cbe7aC1611";
-    const EXPLORER_BASE = "https://bdagscan.com";
+<div>
+<h3>Network</h3>
+<p>BlockDAG</p>
+<p>Fast, scalable, emerging blockchain infrastructure.</p>
+</div>
 
-    // Most explorers use /address/<address>
-    const contractUrl = `${EXPLORER_BASE}/address/${CONTRACT_ADDRESS}`;
-    document.getElementById("viewContract").href = contractUrl;
+<div>
+<h3>Utility Direction</h3>
+<p>
+Future integration with apps, mapping utilities,
+community ecosystem, and real-world usage.
+</p>
+</div>
+</div>
+</div>
 
-    const toast = document.getElementById("toast");
-    const copyBtn = document.getElementById("copyBtn");
+<!-- ROADMAP -->
+<div class="card">
+<h2>Roadmap</h2>
 
-    function showToast(msg){
-      toast.textContent = msg;
-      setTimeout(() => toast.textContent = "", 1200);
-    }
+<ul>
+<li>✅ Token Deployment on BlockDAG</li>
+<li>✅ Website Launch</li>
+<li>🔜 Community Growth & Awareness</li>
+<li>🔜 Exchange Visibility</li>
+<li>🔜 App Integration Development</li>
+<li>🔜 Real-World Utility Expansion</li>
+<li>🌎 Long-Term Global Adoption Vision</li>
+</ul>
+</div>
 
-    copyBtn.addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(CONTRACT_ADDRESS);
-        showToast("Copied ✓");
-      }catch(e){
-        // fallback
-        const ta = document.createElement("textarea");
-        ta.value = CONTRACT_ADDRESS;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        showToast("Copied ✓");
-      }
-    });
-  </script>
+<!-- CONTRACT -->
+<div class="card">
+<h2>Contract Address</h2>
+
+<div class="address">
+0xdc484e4ad0cB6007f10220144Ae986cbe7aC1611
+</div>
+
+<a class="btn"
+href="https://bdagscan.com/address/0xdc484e4ad0cB6007f10220144Ae986cbe7aC1611"
+target="_blank">
+View Contract on BDAGScan
+</a>
+</div>
+
+<!-- INVESTOR MESSAGE -->
+<div class="card">
+<h2>Why OVERLANDCOIN?</h2>
+<p>
+OVERLANDCOIN is built with a long-term vision combining blockchain,
+real-world utility, and community-driven innovation.
+The project focuses on sustainable growth rather than short-term hype.
+</p>
+
+<p>
+This aligns with the future of decentralized finance:
+utility, adoption, and strong community foundations.
+</p>
+</div>
+
+</div>
 </body>
 </html>
